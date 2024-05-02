@@ -1,3 +1,4 @@
+import fs from "fs";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -9,9 +10,9 @@ export const contentType = "image/png";
 export async function loadAssets(): Promise<
   { name: string; data: ArrayBuffer; weight: 400; style: "normal" }[]
 > {
-  const roboto = await fetch(
-    `http://localhost:3000/public/fonts/Roboto-Regular.ttf`
-  ).then((res) => res.arrayBuffer());
+  const fontPath = `${process.cwd()}/public/fonts/Roboto-Regular.ttf`;
+  console.debug("🎨 loadAssets", { fontPath });
+  const roboto = fs.readFileSync(fontPath).buffer;
   console.debug("🎨 loadAssets", { roboto });
   return [
     {
@@ -39,9 +40,6 @@ export default async function Image({ params }: { params: {} }) {
           background: "white",
           color: "black",
           padding: 20,
-          flexDirection: "column",
-          justifyContent: "center",
-          display: "flex",
           whiteSpace: "pre-wrap",
         }}
       >
