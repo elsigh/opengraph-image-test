@@ -11,9 +11,8 @@ export async function loadAssets(): Promise<
   { name: string; data: ArrayBuffer; weight: 400; style: "normal" }[]
 > {
   const fontPath = `${process.cwd()}/public/fonts/Roboto-Regular.ttf`;
-  console.debug("🎨 loadAssets", { fontPath });
   const roboto = fs.readFileSync(fontPath).buffer;
-  console.debug("🎨 loadAssets", { roboto });
+  console.debug("🎨 loadAssets", { fontPath, roboto });
   return [
     {
       name: "roboto",
